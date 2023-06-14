@@ -35,3 +35,9 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 ## Screenshots
 <img src="https://i.imgur.com/f5NwgBZ.png">
 <img src="https://i.imgur.com/izBgfpM.png">
+
+##Changes
+- In this update, the options generation functionality has been moved to JavaScript, allowing for dynamic generation of options based on predefined arrays.
+- By moving the options generation to JavaScript, it becomes easier to modify or expand the available options in the future by simply updating the arrays in the JavaScript code.
+- This change enhances the flexibility and maintainability of the bug report form, making it easier to manage and adapt to different bug types, severity levels, and priorities as needed.
+- Users of the bug report form will now experience improved usability and flexibility when selecting bug types, severity levels, and priorities, as these options can be dynamically generated based on the JavaScript code.

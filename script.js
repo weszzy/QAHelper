@@ -1,27 +1,96 @@
-document.getElementById("bugReportForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form submission
+// Function to export bug reports based on the selected file format
+function exportBugReports(fileFormat) {
+    // Get form values
+    var projectName = document.getElementById('project-name').value;
+    var hoursSpent = document.getElementById('hours-spent').value;
+    var bugType = document.getElementById('bug-type').value;
+    var bugImportance = document.getElementById('bug-importance').value;
+    var bugNotes = document.getElementById('bug-notes').value;
 
-    // Get the form values
-    var projectName = document.getElementById("projectName").value;
-    var hoursSpent = document.getElementById("hoursSpent").value;
-    var bugTypes = Array.from(document.getElementById("bugTypes").selectedOptions).map(option => option.value);
-    var bugImportance = document.getElementById("bugImportance").value;
-    var bugNotes = document.getElementById("bugNotes").value;
-    var bugScreenshot = document.getElementById("bugScreenshot").files[0];
+    // Create the bug report object
+    var bugReport = {
+        projectName: projectName,
+        hoursSpent: hoursSpent,
+        bugType: bugType,
+        bugImportance: bugImportance,
+        bugNotes: bugNotes
+    };
 
-    // You can perform additional validation or processing here before submitting the bug report
+    // Call the appropriate export function based on the selected file format
+    if (fileFormat === 'pdf') {
+        exportBugReportsAsPDF(bugReports);
+    } else if (fileFormat === 'txt') {
+        exportBugReportsAsTXT(bugReports);
+    }
+}
 
-    // Log the bug report data
-    console.log("Project Name: " + projectName);
-    console.log("Hours Spent: " + hoursSpent);
-    console.log("Bug Types: " + bugTypes.join(", "));
-    console.log("Bug Importance: " + bugImportance);
-    console.log("Notes: " + bugNotes);
-    console.log("Screenshot: ", bugScreenshot);
+// Function to export bug reports as a PDF
+function exportBugReportsAsPDF(bugReports) {
+    // Define the document definition for pdfmake
+    var docDefinition = {
+        content: [
+            { text: 'Bug Reports', style: 'header' },
+            '\n',
+            { text: 'Project Name: ' + bugReports.projectName, style: 'subheader' },
+            '\n\n',
+            { text: 'Bug Reports:', style: 'subheader' },
+            '\n\n',
+        ]
+    };
 
-    // You can send the bug report data to a server using AJAX or perform any other necessary actions
-    // For simplicity, we are only logging the data here
+    // Add bug reports to the PDF document
+    bugReports.reports.forEach(function (report, index) {
+        docDefinition.content.push(
+            { text: 'Bug ' + (index + 1), style: 'bugHeader' },
+            'Project Name: ' + report.projectName,
+            'Hours Spent: ' + report.hoursSpent,
+            'Bug Type: ' + report.bugType,
+            'Bug Importance: ' + report.bugImportance,
+            'Bug Notes: ' + report.bugNotes,
+            '\n'
+        );
+    });
 
-    // Reset the form
-    document.getElementById("bugReportForm").reset();
+    // Generate the PDF and initiate download
+    var pdfDocGenerator = pdfMake.createPdf(docDefinition);
+    pdfDocGenerator.download('bug_reports.pdf');
+}
+
+// Function to export bug reports as a TXT file
+function exportBugReportsAsTXT(bugReports) {
+    var textContent = 'Bug Reports\n\n';
+    textContent += 'Project Name: ' + bugReports.projectName + '\n\n';
+    textContent += 'Bug Reports:\n\n';
+
+    bugReports.reports.forEach(function (report, index) {
+        textContent += 'Bug ' + (index + 1) + '\n';
+        textContent += 'Project Name: ' + report.projectName + '\n';
+        textContent += 'Hours Spent: ' + report.hoursSpent + '\n';
+        textContent += 'Bug Type: ' + report.bugType + '\n';
+        textContent += 'Bug Importance: ' + report.bugImportance + '\n';
+        textContent += 'Bug Notes: ' + report.bugNotes + '\n\n';
+    });
+
+    // Create a new Blob with the text content
+    var blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+
+    // Initiate download using FileSaver.js
+    saveAs(blob, 'bug_reports.txt');
+}
+
+// Log the bug report
+console.log('Bug Report:', bugReport);
+
+// Reset the form
+document.getElementById('bug-report-form').reset();
+});
+
+var bugReports = {
+    projectName: projectName,
+    reports: [bugReport]
+};
+
+// Call the export functions to generate and download the files
+exportBugReportsAsPDF(bugReports);
+exportBugReportsAsTXT(bugReports);
 });

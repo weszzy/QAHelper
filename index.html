@@ -1,51 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>QA Bug Reporting</title>
+    <title>Bug Report Web App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>QA Bug Reporting</h1>
-        <form>
-            <label for="project-name">Project Name:</label>
-            <input type="text" id="project-name" class="input-field" required>
+    <h1>Bug Report Web App</h1>
 
-            <label for="hours-spent">Hours Spent:</label>
-            <input type="number" id="hours-spent" class="input-field" required>
+    <form id="bug-report-form">
+        <label for="project-name">Project Name:</label>
+        <input type="text" id="project-name" required>
 
-            <label for="bug-type">Bug Type:</label>
-            <select id="bug-type" class="input-field" required>
-                <option value="">Select Type</option>
-                <option value="functional">Functional</option>
-                <option value="performance">Performance</option>
-                <option value="visual">Visual</option>
-            </select>
+        <label for="hours-spent">Hours Spent:</label>
+        <input type="number" id="hours-spent" required>
 
-            <label for="bug-importance">Bug Importance:</label>
-            <select id="bug-importance" class="input-field" required>
-                <option value="">Select Importance</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-            </select>
+        <label for="bug-type">Bug Type:</label>
+        <select id="bug-type" required>
+            <option value="UI">UI Bug</option>
+            <option value="Functionality">Functionality Bug</option>
+            <option value="Performance">Performance Bug</option>
+        </select>
 
-            <label for="bug-notes">Bug Notes:</label>
-            <textarea id="bug-notes" class="input-field"></textarea>
+        <label for="bug-importance">Bug Importance:</label>
+        <select id="bug-importance" required>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
 
-            <label for="screenshot">Screenshot:</label>
-            <div class="file-input">
-                <input type="file" id="screenshot" class="input-field">
-                <label for="screenshot" class="file-label">Choose File</label>
-            </div>
+        <label for="bug-notes">Bug Notes:</label>
+        <textarea id="bug-notes" required></textarea>
 
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
-    </div>
+        <div class="button-container">
+            <button type="button" onclick="exportBugReports('pdf')">Download PDF</button>
+            <button type="button" onclick="exportBugReports('txt')">Download TXT</button>
+        </div>
+    </form>
 </body>
 
 </html>

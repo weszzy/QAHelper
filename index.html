@@ -12,98 +12,44 @@
 <body>
     <div class="container">
         <h1>QAHelper</h1>
-        <!--Theme switch button-->
         <button id="theme-switch" onclick="toggleTheme()">🌗</button>
-
-
         <form id="bug-report-form">
             <div class="form-group">
                 <label for="project-name">Project Name:</label>
                 <input type="text" id="project-name" required>
             </div>
-
             <div class="form-group">
                 <label for="hours-spent">Hours Spent:</label>
                 <input type="number" id="hours-spent" required>
             </div>
-
             <div class="form-group">
                 <label for="bug-type">Bug Type:</label>
                 <select id="bug-type" required>
-                    <option value="UI">UI Bug</option>
-                    <option value="Functionality">Functionality Bug</option>
-                    <option value="Performance">Performance Bug</option>
-                    <option value="Security">Security Bug</option>
-                    <option value="Compatibility">Compatibility Bug</option>
-                    <option value="Network">Network Bug</option>
-                    <option value="Database">Database Bug</option>
-                    <option value="Crash">Crash Bug</option>
-                    <option value="Memory">Memory Bug</option>
-                    <option value="Input">Input Bug</option>
-                    <option value="Output">Output Bug</option>
-                    <option value="Logic">Logic Bug</option>
-                    <option value="Configuration">Configuration Bug</option>
-                    <option value="Localization">Localization Bug</option>
-                    <option value="Accessibility">Accessibility Bug</option>
-                    <option value="Documentation">Documentation Bug</option>
-                    <option value="Installation">Installation Bug</option>
-                    <option value="Upgrade">Upgrade Bug</option>
-                    <option value="Integration">Integration Bug</option>
-                    <option value="Regression">Regression Bug</option>
-                    <option value="Usability">Usability Bug</option>
-                    <!-- Additional Bugs -->
-                    <option value="Audio">Audio Bug</option>
-                    <option value="Video">Video Bug</option>
-                    <option value="Animation">Animation Bug</option>
-                    <option value="Storage">Storage Bug</option>
-                    <option value="File">File Bug</option>
-                    <option value="Performance">Performance Bug</option>
-                    <option value="Authentication">Authentication Bug</option>
-                    <option value="Authorization">Authorization Bug</option>
-                    <option value="Concurrency">Concurrency Bug</option>
-                    <option value="API">API Bug</option>
-                    <option value="Third-party">Third-party Bug</option>
-                    <option value="Memory leak">Memory leak Bug</option>
-                    <option value="Rendering">Rendering Bug</option>
-                    <option value="Compatibility">Compatibility Bug</option>
-                    <option value="Mobile">Mobile Bug</option>
-                    <option value="Desktop">Desktop Bug</option>
-                    <option value="Cross-browser">Cross-browser Bug</option>
-                    <option value="Input validation">Input validation Bug</option>
-                    <option value="Data corruption">Data corruption Bug</option>
-                    <option value="Performance degradation">Performance degradation Bug</option>
+                    <!-- Options for bug types will be dynamically generated using JavaScript -->
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="bug-severity">Bug Severity:</label>
                 <select id="bug-severity" required>
-                    <option value="Low">Low</option>
-                    <option value="Minor">Minor</option>
-                    <option value="Major">Major</option>
-                    <option value="Critical">Critical</option>
+                    <!-- Options for bug severity will be dynamically generated using JavaScript -->
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="bug-priority">Bug Priority:</label>
                 <select id="bug-priority" required>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
+                    <!-- Options for bug priority will be dynamically generated using JavaScript -->
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="bug-notes">Bug Notes:</label>
                 <textarea id="bug-notes" required></textarea>
             </div>
-
             <div class="button-container">
                 <button type="button" onclick="exportBugReports('txt')">Download TXT</button>
             </div>
         </form>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,70 @@
+// Function to create HTML elements
+function createElement(elementType, attributes = {}, textContent = '') {
+    const element = document.createElement(elementType);
+    Object.entries(attributes).forEach(([key, value]) => {
+        element.setAttribute(key, value);
+    });
+    if (textContent) {
+        element.textContent = textContent;
+    }
+    return element;
+}
+
+// Function to dynamically generate options for bug types
+function generateBugTypes() {
+    var bugTypes = [
+        "UI", "Functionality", "Performance", "Security", "Compatibility",
+        "Network", "Database", "Crash", "Memory", "Input", "Output", "Logic",
+        "Configuration", "Localization", "Accessibility", "Documentation",
+        "Installation", "Upgrade", "Integration", "Regression", "Usability",
+        "Audio", "Video", "Animation", "Storage", "File", "Performance",
+        "Authentication", "Authorization", "Concurrency", "API", "Third-party",
+        "Memory leak", "Rendering", "Compatibility", "Mobile", "Desktop",
+        "Cross-browser", "Input validation", "Data corruption",
+        "Performance degradation"
+    ];
+
+    var selectElement = document.getElementById("bug-type");
+
+    for (var i = 0; i < bugTypes.length; i++) {
+        var option = document.createElement("option");
+        option.value = bugTypes[i];
+        option.text = bugTypes[i];
+        selectElement.appendChild(option);
+    }
+}
+
+// Function to dynamically generate options for bug severity
+function generateBugSeverity() {
+    var bugSeverities = ["Low", "Minor", "Major", "Critical"];
+    var selectElement = document.getElementById("bug-severity");
+
+    for (var i = 0; i < bugSeverities.length; i++) {
+        var option = document.createElement("option");
+        option.value = bugSeverities[i];
+        option.text = bugSeverities[i];
+        selectElement.appendChild(option);
+    }
+}
+
+// Function to dynamically generate options for bug priority
+function generateBugPriority() {
+    var bugPriorities = ["Low", "Medium", "High"];
+    var selectElement = document.getElementById("bug-priority");
+
+    for (var i = 0; i < bugPriorities.length; i++) {
+        var option = document.createElement("option");
+        option.value = bugPriorities[i];
+        option.text = bugPriorities[i];
+        selectElement.appendChild(option);
+    }
+}
+
+// Call the functions to generate options for bug types, bug severity, and bug priority
+generateBugTypes();
+generateBugSeverity();
+generateBugPriority();
+
 // Function to export bug reports based on the selected file format
 function exportBugReports(fileFormat) {
     // Get form values
@@ -56,13 +123,13 @@ function detectUserTheme() {
     var body = document.body;
     var themePreference = localStorage.getItem('themePreference');
 
-    // Check if the user has a theme preference set
+    // Check if the user has a theme preference
     if (themePreference === 'dark') {
         body.classList.add('dark-theme');
     } else if (themePreference === 'light') {
         body.classList.remove('dark-theme');
     } else {
-        // If no preference is set, detect the user's system theme
+        // If no theme preference is found, check the user's system preference
         var userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (userPrefersDark) {
             body.classList.add('dark-theme');
@@ -70,5 +137,5 @@ function detectUserTheme() {
     }
 }
 
-// Call the detectUserTheme function when the page loads
+// Detect the user's theme preference on page load
 detectUserTheme();
